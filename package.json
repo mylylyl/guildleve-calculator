@@ -1,0 +1,25 @@
+{
+  "name": "guildleve-calculator",
+  "version": "1.0.0",
+  "description": "A FFXIV Guildleve Profit Calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fisherwise/guildleve-calculator.git"
+  },
+  "keywords": [
+    "ffxiv"
+  ],
+  "author": "fisherwise",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/fisherwise/guildleve-calculator/issues"
+  },
+  "homepage": "https://github.com/fisherwise/guildleve-calculator#readme",
+  "dependencies": {
+    "bootstrap": "^5.0.0-beta1"
+  }
+}
