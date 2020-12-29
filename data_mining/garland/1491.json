@@ -1,0 +1,1099 @@
+{
+    "leve": {
+        "name": "Supreme Official Strategy Guide",
+        "description": "It is the Cabinet of Curiosity's duty to gather and preserve texts from all over the realm. Naturally, we welcome those keen to peruse our tomes, though we have grown concerned about wear and tear of late. May I ask you to create tactical manuals wrapped in covers strengthened with high mythril?",
+        "id": 1491,
+        "patch": 5.0,
+        "client": "Cabinet of Curiosity Librarian, Moren",
+        "lvl": 78,
+        "jobCategory": 15,
+        "levemete": 1027848,
+        "areaid": 2951,
+        "xp": 6588750,
+        "gil": 4032,
+        "rewards": 716,
+        "plate": 80061,
+        "frame": 80005,
+        "areaicon": 110113,
+        "requires": [
+            {
+                "item": 26279
+            }
+        ],
+        "complexity": {
+            "nq": 25,
+            "hq": 654
+        }
+    },
+    "rewards": {
+        "id": 716,
+        "entries": [
+            {
+                "item": 13,
+                "rate": 0.23,
+                "amount": 85
+            },
+            {
+                "item": 12,
+                "rate": 0.23,
+                "amount": 85
+            },
+            {
+                "item": 27781,
+                "rate": 0.23
+            },
+            {
+                "item": 13,
+                "rate": 0.1,
+                "amount": 102
+            },
+            {
+                "item": 12,
+                "rate": 0.1,
+                "amount": 102
+            },
+            {
+                "item": 27781,
+                "rate": 0.1,
+                "amount": 2
+            }
+        ]
+    },
+    "ingredients": [
+        {
+            "name": "Dwarven Mythril Codex",
+            "id": 26279,
+            "icon": 33299,
+            "category": 98,
+            "ilvl": 415,
+            "price": 44283,
+            "craft": [
+                {
+                    "id": 4244,
+                    "job": 14,
+                    "rlvl": 415,
+                    "durability": 80,
+                    "quality": 16162,
+                    "progress": 3645,
+                    "lvl": 78,
+                    "suggestedCraftsmanship": 1662,
+                    "suggestedControl": 1541,
+                    "materialQualityFactor": 75,
+                    "hq": 1,
+                    "quickSynth": 1,
+                    "ingredients": [
+                        {
+                            "id": 27781,
+                            "amount": 1,
+                            "quality": 2447.894
+                        },
+                        {
+                            "id": 27714,
+                            "amount": 2,
+                            "quality": 2447.894
+                        },
+                        {
+                            "id": 27693,
+                            "amount": 1,
+                            "quality": 2447.894
+                        },
+                        {
+                            "id": 27709,
+                            "amount": 1,
+                            "quality": 2329.92334
+                        },
+                        {
+                            "id": 13,
+                            "amount": 7
+                        },
+                        {
+                            "id": 12,
+                            "amount": 7
+                        }
+                    ],
+                    "complexity": {
+                        "nq": 634,
+                        "hq": 654
+                    }
+                }
+            ],
+            "vendors": [
+                1027465
+            ]
+        },
+        {
+            "name": "Enchanted Dimythrite Ink",
+            "id": 27781,
+            "icon": 25924,
+            "category": 54,
+            "ilvl": 415,
+            "price": 3075,
+            "craft": [
+                {
+                    "id": 3867,
+                    "job": 14,
+                    "rlvl": 415,
+                    "durability": 40,
+                    "quality": 16162,
+                    "progress": 1822,
+                    "lvl": 78,
+                    "suggestedCraftsmanship": 1662,
+                    "suggestedControl": 1541,
+                    "materialQualityFactor": 75,
+                    "hq": 1,
+                    "quickSynth": 1,
+                    "ingredients": [
+                        {
+                            "id": 27702,
+                            "amount": 3,
+                            "quality": 2441.825
+                        },
+                        {
+                            "id": 27773,
+                            "amount": 1,
+                            "quality": 2371.72485
+                        },
+                        {
+                            "id": 27782,
+                            "amount": 1,
+                            "quality": 2424.3
+                        },
+                        {
+                            "id": 13,
+                            "amount": 7
+                        }
+                    ],
+                    "complexity": {
+                        "nq": 124,
+                        "hq": 144
+                    }
+                }
+            ],
+            "leves": [
+                1488,
+                1491
+            ]
+        },
+        {
+            "name": "Dimythrite Sand",
+            "id": 27702,
+            "icon": 22650,
+            "category": 48,
+            "ilvl": 418,
+            "price": 210,
+            "voyages": [
+                "Sea of Jade 1"
+            ],
+            "ventures": [
+                807
+            ],
+            "nodes": [
+                602
+            ]
+        },
+        {
+            "name": "Vampire Cup Vine",
+            "id": 27773,
+            "icon": 21662,
+            "category": 54,
+            "ilvl": 406,
+            "price": 2365,
+            "tradeShops": [
+                {
+                    "shop": "Shop",
+                    "npcs": [
+                        1027998,
+                        1027538,
+                        1027709
+                    ],
+                    "listings": [
+                        {
+                            "item": [
+                                {
+                                    "id": "27773",
+                                    "amount": 1,
+                                    "hq": 1
+                                }
+                            ],
+                            "currency": [
+                                {
+                                    "id": "26807",
+                                    "amount": 2
+                                }
+                            ]
+                        },
+                        {
+                            "item": [
+                                {
+                                    "id": "27773",
+                                    "amount": 1
+                                }
+                            ],
+                            "currency": [
+                                {
+                                    "id": "26807",
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "leves": [
+                1484,
+                1486
+            ],
+            "ventures": [
+                780
+            ]
+        },
+        {
+            "name": "Underground Spring Water",
+            "id": 27782,
+            "icon": 22678,
+            "category": 54,
+            "ilvl": 415,
+            "price": 630,
+            "leves": [
+                1490,
+                1492
+            ],
+            "ventures": [
+                797
+            ],
+            "nodes": [
+                598
+            ]
+        },
+        {
+            "name": "Dwarven Mythril Ingot",
+            "id": 27714,
+            "icon": 20811,
+            "category": 49,
+            "ilvl": 415,
+            "price": 3075,
+            "craft": [
+                {
+                    "id": 3821,
+                    "job": 9,
+                    "rlvl": 415,
+                    "durability": 40,
+                    "quality": 16162,
+                    "progress": 1822,
+                    "lvl": 78,
+                    "suggestedCraftsmanship": 1662,
+                    "suggestedControl": 1541,
+                    "materialQualityFactor": 75,
+                    "hq": 1,
+                    "quickSynth": 1,
+                    "ingredients": [
+                        {
+                            "id": 27703,
+                            "amount": 4,
+                            "quality": 2812.72388
+                        },
+                        {
+                            "id": 12534,
+                            "amount": 1,
+                            "quality": 870.605
+                        },
+                        {
+                            "id": 8,
+                            "amount": 7
+                        }
+                    ],
+                    "complexity": {
+                        "nq": 112,
+                        "hq": 132
+                    }
+                },
+                {
+                    "id": 3826,
+                    "job": 10,
+                    "rlvl": 415,
+                    "durability": 40,
+                    "quality": 16162,
+                    "progress": 1822,
+                    "lvl": 78,
+                    "suggestedCraftsmanship": 1662,
+                    "suggestedControl": 1541,
+                    "materialQualityFactor": 75,
+                    "hq": 1,
+                    "quickSynth": 1,
+                    "ingredients": [
+                        {
+                            "id": 27703,
+                            "amount": 4,
+                            "quality": 2812.72388
+                        },
+                        {
+                            "id": 12534,
+                            "amount": 1,
+                            "quality": 870.605
+                        },
+                        {
+                            "id": 9,
+                            "amount": 7
+                        }
+                    ],
+                    "complexity": {
+                        "nq": 112,
+                        "hq": 132
+                    }
+                }
+            ],
+            "leves": [
+                1445,
+                1446,
+                1447,
+                1460,
+                1461,
+                1462
+            ]
+        },
+        {
+            "name": "Dimythrite Ore",
+            "id": 27703,
+            "icon": 21208,
+            "category": 48,
+            "ilvl": 420,
+            "price": 630,
+            "voyages": [
+                "Rogo-Tumu-Here's Repose"
+            ],
+            "ventures": [
+                799
+            ],
+            "nodes": [
+                598
+            ]
+        },
+        {
+            "name": "Mythrite Ore",
+            "id": 12534,
+            "icon": 21221,
+            "category": 48,
+            "ilvl": 130,
+            "price": 772,
+            "tradeShops": [
+                {
+                    "shop": "Curious Crop Exchange",
+                    "npcs": [
+                        1005633,
+                        1005640,
+                        1005647,
+                        1018091,
+                        1018094,
+                        1018097,
+                        1019101,
+                        1019111
+                    ],
+                    "listings": [
+                        {
+                            "item": [
+                                {
+                                    "id": "12534",
+                                    "amount": 4
+                                }
+                            ],
+                            "currency": [
+                                {
+                                    "id": "15857",
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "leves": [
+                974,
+                975,
+                976,
+                977,
+                978,
+                979,
+                1004,
+                1005,
+                1006,
+                1007,
+                1008,
+                1009,
+                1124,
+                1125,
+                1126,
+                1127,
+                1128,
+                1129
+            ],
+            "ventures": [
+                545
+            ],
+            "nodes": [
+                285
+            ]
+        },
+        {
+            "name": "Lignum Vitae Lumber",
+            "id": 27693,
+            "icon": 22454,
+            "category": 50,
+            "ilvl": 415,
+            "price": 3075,
+            "craft": [
+                {
+                    "id": 3816,
+                    "job": 8,
+                    "rlvl": 415,
+                    "durability": 40,
+                    "quality": 16162,
+                    "progress": 1822,
+                    "lvl": 78,
+                    "suggestedCraftsmanship": 1662,
+                    "suggestedControl": 1541,
+                    "materialQualityFactor": 75,
+                    "hq": 1,
+                    "quickSynth": 1,
+                    "ingredients": [
+                        {
+                            "id": 27687,
+                            "amount": 4,
+                            "quality": 3030.375
+                        },
+                        {
+                            "id": 10,
+                            "amount": 7
+                        }
+                    ],
+                    "complexity": {
+                        "nq": 100,
+                        "hq": 120
+                    }
+                }
+            ],
+            "leves": [
+                1415,
+                1416,
+                1417
+            ]
+        },
+        {
+            "name": "Lignum Vitae Log",
+            "id": 27687,
+            "icon": 22402,
+            "category": 50,
+            "ilvl": 415,
+            "price": 630,
+            "ventures": [
+                817
+            ],
+            "nodes": [
+                621
+            ]
+        },
+        {
+            "name": "Stonegold Ingot",
+            "id": 27709,
+            "icon": 20809,
+            "category": 49,
+            "ilvl": 395,
+            "price": 2838,
+            "craft": [
+                {
+                    "id": 3828,
+                    "job": 11,
+                    "rlvl": 395,
+                    "durability": 40,
+                    "quality": 13660,
+                    "progress": 1624,
+                    "lvl": 72,
+                    "suggestedCraftsmanship": 1388,
+                    "suggestedControl": 1284,
+                    "materialQualityFactor": 75,
+                    "hq": 1,
+                    "quickSynth": 1,
+                    "ingredients": [
+                        {
+                            "id": 27697,
+                            "amount": 4,
+                            "quality": 2475.0918
+                        },
+                        {
+                            "id": 5118,
+                            "amount": 1,
+                            "quality": 344.633026
+                        },
+                        {
+                            "id": 10,
+                            "amount": 6
+                        }
+                    ],
+                    "complexity": {
+                        "nq": 114,
+                        "hq": 134
+                    }
+                }
+            ],
+            "leves": [
+                1511,
+                1512,
+                1513
+            ]
+        },
+        {
+            "name": "Truegold Ore",
+            "id": 27697,
+            "icon": 21212,
+            "category": 48,
+            "ilvl": 395,
+            "price": 210,
+            "leves": [
+                1451
+            ],
+            "ventures": [
+                790
+            ],
+            "nodes": [
+                592
+            ]
+        },
+        {
+            "name": "Gold Ore",
+            "id": 5118,
+            "icon": 21212,
+            "category": 48,
+            "ilvl": 55,
+            "price": 326,
+            "voyages": [
+                "Sea of Clouds 02",
+                "Sea of Clouds 08",
+                "Sea of Clouds 14",
+                "Sea of Clouds 20",
+                "The Wreckage of the Headway"
+            ],
+            "tradeShops": [
+                {
+                    "shop": "Curious Crop Exchange",
+                    "npcs": [
+                        1005633,
+                        1005640,
+                        1005647,
+                        1018091,
+                        1018094,
+                        1018097,
+                        1019101,
+                        1019111
+                    ],
+                    "listings": [
+                        {
+                            "item": [
+                                {
+                                    "id": "5118",
+                                    "amount": 3
+                                }
+                            ],
+                            "currency": [
+                                {
+                                    "id": "15858",
+                                    "amount": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "ventures": [
+                509
+            ],
+            "nodes": [
+                223
+            ]
+        }
+    ],
+    "partials": [
+        {
+            "type": "item",
+            "id": "27702",
+            "obj": {
+                "i": 27702,
+                "n": "Dimythrite Sand",
+                "l": 418,
+                "c": 22650,
+                "t": 48
+            }
+        },
+        {
+            "type": "item",
+            "id": "27773",
+            "obj": {
+                "i": 27773,
+                "n": "Vampire Cup Vine",
+                "l": 406,
+                "c": 21662,
+                "t": 54
+            }
+        },
+        {
+            "type": "item",
+            "id": "27782",
+            "obj": {
+                "i": 27782,
+                "n": "Underground Spring Water",
+                "l": 415,
+                "c": 22678,
+                "t": 54
+            }
+        },
+        {
+            "type": "node",
+            "id": "602",
+            "obj": {
+                "i": 602,
+                "n": "Mount Biran Mines",
+                "l": 80,
+                "t": 1,
+                "z": 2955
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1027998",
+            "obj": {
+                "i": 1027998,
+                "n": "Gramsol",
+                "l": 2951,
+                "s": 1,
+                "t": "Gemstone Trader",
+                "r": 1,
+                "a": 3254,
+                "c": [
+                    11.11,
+                    13.62
+                ]
+            }
+        },
+        {
+            "type": "item",
+            "id": "26807",
+            "obj": {
+                "i": 26807,
+                "n": "Bicolor Gemstone",
+                "l": 1,
+                "c": 65071,
+                "t": 63
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1027538",
+            "obj": {
+                "i": 1027538,
+                "n": "Pedronille",
+                "l": 2952,
+                "s": 1,
+                "t": "Gemstone Trader",
+                "r": 1,
+                "a": 3278,
+                "c": [
+                    10.59,
+                    12.24
+                ]
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1027709",
+            "obj": {
+                "i": 1027709,
+                "n": "Nacille",
+                "l": 2957,
+                "s": 1,
+                "t": "Gemstone Trader",
+                "r": 1,
+                "a": 3179,
+                "c": [
+                    27.97,
+                    18.26
+                ]
+            }
+        },
+        {
+            "type": "node",
+            "id": "598",
+            "obj": {
+                "i": 598,
+                "n": "The Church of the First Light",
+                "l": 80,
+                "t": 0,
+                "z": 2953
+            }
+        },
+        {
+            "type": "item",
+            "id": "27703",
+            "obj": {
+                "i": 27703,
+                "n": "Dimythrite Ore",
+                "l": 420,
+                "c": 21208,
+                "t": 48
+            }
+        },
+        {
+            "type": "item",
+            "id": "12534",
+            "obj": {
+                "i": 12534,
+                "n": "Mythrite Ore",
+                "l": 130,
+                "c": 21221,
+                "t": 48
+            }
+        },
+        {
+            "type": "node",
+            "id": "285",
+            "obj": {
+                "i": 285,
+                "n": "Gorgagne Holding",
+                "l": 55,
+                "t": 0,
+                "z": 2200
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1005633",
+            "obj": {
+                "i": 1005633,
+                "n": "Material Supplier",
+                "l": 425,
+                "s": 3,
+                "r": 1,
+                "a": 1202,
+                "c": [
+                    11.04,
+                    11.4
+                ]
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1005640",
+            "obj": {
+                "i": 1005640,
+                "n": "Material Supplier",
+                "l": 427,
+                "s": 3,
+                "r": 1,
+                "a": 1115,
+                "c": [
+                    10.97,
+                    8.96
+                ]
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1005647",
+            "obj": {
+                "i": 1005647,
+                "n": "Material Supplier",
+                "l": 426,
+                "s": 3,
+                "r": 1,
+                "a": 1146,
+                "c": [
+                    11.94,
+                    8.33
+                ]
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1018091",
+            "obj": {
+                "i": 1018091,
+                "n": "Apartment Merchant",
+                "l": 1813,
+                "s": 8,
+                "r": 1,
+                "a": 1146,
+                "c": [
+                    6.15,
+                    6.03
+                ]
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1018094",
+            "obj": {
+                "i": 1018094,
+                "n": "Apartment Merchant",
+                "l": 1811,
+                "s": 8,
+                "r": 1,
+                "a": 1146,
+                "c": [
+                    6.15,
+                    6.03
+                ]
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1018097",
+            "obj": {
+                "i": 1018097,
+                "n": "Apartment Merchant",
+                "l": 1815,
+                "s": 8,
+                "r": 1,
+                "a": 1146,
+                "c": [
+                    6.15,
+                    6.03
+                ]
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1019101",
+            "obj": {
+                "i": 1019101,
+                "n": "Material Supplier",
+                "l": 2412,
+                "s": 3,
+                "r": 1,
+                "c": [
+                    "10.5",
+                    "12.2"
+                ]
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1019111",
+            "obj": {
+                "i": 1019111,
+                "n": "Apartment Merchant",
+                "l": 2272,
+                "s": 8,
+                "r": 1,
+                "c": [
+                    "6.1",
+                    "6.0"
+                ]
+            }
+        },
+        {
+            "type": "item",
+            "id": "15857",
+            "obj": {
+                "i": 15857,
+                "n": "Althyk Lavender",
+                "l": 155,
+                "c": 25002,
+                "t": 54
+            }
+        },
+        {
+            "type": "item",
+            "id": "27687",
+            "obj": {
+                "i": 27687,
+                "n": "Lignum Vitae Log",
+                "l": 415,
+                "c": 22402,
+                "t": 50
+            }
+        },
+        {
+            "type": "node",
+            "id": "621",
+            "obj": {
+                "i": 621,
+                "n": "Hare Among Giants",
+                "l": 80,
+                "t": 2,
+                "z": 2953
+            }
+        },
+        {
+            "type": "item",
+            "id": "27697",
+            "obj": {
+                "i": 27697,
+                "n": "Truegold Ore",
+                "l": 395,
+                "c": 21212,
+                "t": 48
+            }
+        },
+        {
+            "type": "item",
+            "id": "5118",
+            "obj": {
+                "i": 5118,
+                "n": "Gold Ore",
+                "l": 55,
+                "c": 21212,
+                "t": 48
+            }
+        },
+        {
+            "type": "node",
+            "id": "592",
+            "obj": {
+                "i": 592,
+                "n": "The Bookman's Shelves",
+                "l": 75,
+                "t": 0,
+                "z": 2956
+            }
+        },
+        {
+            "type": "node",
+            "id": "223",
+            "obj": {
+                "i": 223,
+                "n": "The Burning Wall",
+                "l": 50,
+                "t": 0,
+                "z": 44,
+                "s": 1,
+                "lt": "Unspoiled",
+                "ti": [
+                    9
+                ]
+            }
+        },
+        {
+            "type": "item",
+            "id": "15858",
+            "obj": {
+                "i": 15858,
+                "n": "Voidrake",
+                "l": 155,
+                "c": 25004,
+                "t": 54
+            }
+        },
+        {
+            "type": "item",
+            "id": "26278",
+            "obj": {
+                "i": 26278,
+                "n": "Dwarven Mythril Grimoire",
+                "l": 415,
+                "c": 33300,
+                "t": 10,
+                "p": 44283
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1027465",
+            "obj": {
+                "i": 1027465,
+                "n": "Tholl Junkmonger",
+                "l": 2954,
+                "s": 7,
+                "a": 3354,
+                "c": [
+                    11.93,
+                    8.87
+                ]
+            }
+        },
+        {
+            "type": "item",
+            "id": "27781",
+            "obj": {
+                "i": 27781,
+                "n": "Enchanted Dimythrite Ink",
+                "l": 415,
+                "c": 25924,
+                "t": 54
+            }
+        },
+        {
+            "type": "item",
+            "id": "27714",
+            "obj": {
+                "i": 27714,
+                "n": "Dwarven Mythril Ingot",
+                "l": 415,
+                "c": 20811,
+                "t": 49
+            }
+        },
+        {
+            "type": "item",
+            "id": "27693",
+            "obj": {
+                "i": 27693,
+                "n": "Lignum Vitae Lumber",
+                "l": 415,
+                "c": 22454,
+                "t": 50
+            }
+        },
+        {
+            "type": "item",
+            "id": "27709",
+            "obj": {
+                "i": 27709,
+                "n": "Stonegold Ingot",
+                "l": 395,
+                "c": 20809,
+                "t": 49
+            }
+        },
+        {
+            "type": "leve",
+            "id": "1491",
+            "obj": {
+                "i": 1491,
+                "n": "Supreme Official Strategy Guide",
+                "l": 78,
+                "j": 15,
+                "p": 2951
+            }
+        },
+        {
+            "type": "item",
+            "id": "26119",
+            "obj": {
+                "i": 26119,
+                "n": "Zonureskin Codex",
+                "l": 409,
+                "c": 33291,
+                "t": 98,
+                "p": 43149
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1027848",
+            "obj": {
+                "i": 1027848,
+                "n": "Moyce",
+                "l": 2951
+            }
+        },
+        {
+            "type": "item",
+            "id": "26279",
+            "obj": {
+                "i": 26279,
+                "n": "Dwarven Mythril Codex",
+                "l": 415,
+                "c": 33299,
+                "t": 98,
+                "p": 44283
+            }
+        }
+    ]
+}

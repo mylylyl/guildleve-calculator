@@ -1,0 +1,432 @@
+{
+    "leve": {
+        "name": "A Cookie for Your Troubles",
+        "description": "I knew my old recipe would save me from ruin yet again. Better than that, I have found myself with a surplus of coin, and what better to do with extra funds than to spend them realizing my dreams? Dreams of jumping into a veritable ocean of cookies, and breathing in their sugary scent!",
+        "id": 1477,
+        "patch": 5.0,
+        "client": "The Second Serving Proprietor, Hanji-Fae",
+        "lvl": 78,
+        "jobCategory": 16,
+        "levemete": 1027848,
+        "areaid": 2951,
+        "xp": 2313850,
+        "gil": 3024,
+        "rewards": 726,
+        "plate": 80062,
+        "frame": 80005,
+        "areaicon": 110113,
+        "repeats": 2,
+        "requires": [
+            {
+                "item": 27878,
+                "amount": 3
+            }
+        ],
+        "complexity": {
+            "nq": 15,
+            "hq": 1032
+        }
+    },
+    "rewards": {
+        "id": 726,
+        "entries": [
+            {
+                "item": 8,
+                "rate": 0.23,
+                "amount": 35
+            },
+            {
+                "item": 13,
+                "rate": 0.23,
+                "amount": 35
+            },
+            {
+                "item": 27830,
+                "rate": 0.23
+            },
+            {
+                "item": 8,
+                "rate": 0.1,
+                "amount": 42
+            },
+            {
+                "item": 13,
+                "rate": 0.1,
+                "amount": 42
+            },
+            {
+                "item": 27837,
+                "rate": 0.1,
+                "amount": 2
+            }
+        ]
+    },
+    "ingredients": [
+        {
+            "name": "Coffee Biscuit",
+            "id": 27878,
+            "icon": 24007,
+            "category": 46,
+            "ilvl": 418,
+            "price": 3737,
+            "craft": [
+                {
+                    "id": 3908,
+                    "job": 15,
+                    "rlvl": 418,
+                    "durability": 80,
+                    "quality": 16582,
+                    "progress": 3705,
+                    "lvl": 79,
+                    "suggestedCraftsmanship": 1702,
+                    "suggestedControl": 1579,
+                    "materialQualityFactor": 75,
+                    "yield": 3,
+                    "hq": 1,
+                    "quickSynth": 1,
+                    "ingredients": [
+                        {
+                            "id": 27841,
+                            "amount": 1,
+                            "quality": 4131.82959
+                        },
+                        {
+                            "id": 27837,
+                            "amount": 1,
+                            "quality": 4254.862
+                        },
+                        {
+                            "id": 27839,
+                            "amount": 1,
+                            "quality": 4049.80835
+                        },
+                        {
+                            "id": 8,
+                            "amount": 7
+                        },
+                        {
+                            "id": 13,
+                            "amount": 7
+                        }
+                    ],
+                    "complexity": {
+                        "nq": 324,
+                        "hq": 344
+                    }
+                }
+            ],
+            "vendors": [
+                1027240,
+                1027493
+            ]
+        },
+        {
+            "name": "Upland Wheat Flour",
+            "id": 27841,
+            "icon": 25351,
+            "category": 45,
+            "ilvl": 403,
+            "price": 2917,
+            "craft": [
+                {
+                    "id": 3880,
+                    "job": 15,
+                    "rlvl": 403,
+                    "durability": 40,
+                    "quality": 14482,
+                    "progress": 1703,
+                    "lvl": 74,
+                    "suggestedCraftsmanship": 1498,
+                    "suggestedControl": 1387,
+                    "materialQualityFactor": 75,
+                    "yield": 3,
+                    "hq": 1,
+                    "quickSynth": 1,
+                    "ingredients": [
+                        {
+                            "id": 27832,
+                            "amount": 5,
+                            "quality": 2172.3
+                        },
+                        {
+                            "id": 8,
+                            "amount": 7
+                        }
+                    ],
+                    "complexity": {
+                        "nq": 112,
+                        "hq": 132
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Upland Wheat",
+            "id": 27832,
+            "icon": 25357,
+            "category": 45,
+            "ilvl": 400,
+            "price": 630,
+            "ventures": [
+                826
+            ],
+            "nodes": [
+                618
+            ]
+        },
+        {
+            "name": "Coffee Beans",
+            "id": 27837,
+            "icon": 25919,
+            "category": 45,
+            "ilvl": 415,
+            "price": 210,
+            "leves": [
+                1475,
+                1476,
+                1477
+            ],
+            "ventures": [
+                834
+            ],
+            "nodes": [
+                625
+            ]
+        },
+        {
+            "name": "Garden Beet Sugar",
+            "id": 27839,
+            "icon": 25108,
+            "category": 45,
+            "ilvl": 395,
+            "price": 2838,
+            "craft": [
+                {
+                    "id": 3878,
+                    "job": 15,
+                    "rlvl": 395,
+                    "durability": 40,
+                    "quality": 13660,
+                    "progress": 1624,
+                    "lvl": 72,
+                    "suggestedCraftsmanship": 1388,
+                    "suggestedControl": 1284,
+                    "materialQualityFactor": 75,
+                    "yield": 3,
+                    "hq": 1,
+                    "quickSynth": 1,
+                    "ingredients": [
+                        {
+                            "id": 27824,
+                            "amount": 5,
+                            "quality": 2049.0
+                        },
+                        {
+                            "id": 8,
+                            "amount": 6
+                        }
+                    ],
+                    "complexity": {
+                        "nq": 106,
+                        "hq": 126
+                    }
+                }
+            ],
+            "leves": [
+                1466,
+                1467,
+                1468
+            ]
+        },
+        {
+            "name": "Garden Beet",
+            "id": 27824,
+            "icon": 25223,
+            "category": 45,
+            "ilvl": 395,
+            "price": 210,
+            "ventures": [
+                824
+            ],
+            "nodes": [
+                617
+            ]
+        }
+    ],
+    "partials": [
+        {
+            "type": "item",
+            "id": "27832",
+            "obj": {
+                "i": 27832,
+                "n": "Upland Wheat",
+                "l": 400,
+                "c": 25357,
+                "t": 45
+            }
+        },
+        {
+            "type": "node",
+            "id": "618",
+            "obj": {
+                "i": 618,
+                "n": "Seagazer",
+                "l": 75,
+                "t": 3,
+                "z": 2954
+            }
+        },
+        {
+            "type": "node",
+            "id": "625",
+            "obj": {
+                "i": 625,
+                "n": "Scree",
+                "l": 80,
+                "t": 3,
+                "z": 2954
+            }
+        },
+        {
+            "type": "item",
+            "id": "27824",
+            "obj": {
+                "i": 27824,
+                "n": "Garden Beet",
+                "l": 395,
+                "c": 25223,
+                "t": 45
+            }
+        },
+        {
+            "type": "node",
+            "id": "617",
+            "obj": {
+                "i": 617,
+                "n": "The Woolen Way",
+                "l": 75,
+                "t": 3,
+                "z": 2956
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1027240",
+            "obj": {
+                "i": 1027240,
+                "n": "Hanji-Fae",
+                "l": 2951,
+                "s": 1,
+                "t": "Culinarian",
+                "a": 3371,
+                "c": [
+                    9.56,
+                    14.74
+                ]
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1027493",
+            "obj": {
+                "i": 1027493,
+                "n": "Tholl Culinarian",
+                "l": 2954,
+                "s": 1,
+                "a": 3354,
+                "c": [
+                    12.0,
+                    8.67
+                ]
+            }
+        },
+        {
+            "type": "item",
+            "id": "27841",
+            "obj": {
+                "i": 27841,
+                "n": "Upland Wheat Flour",
+                "l": 403,
+                "c": 25351,
+                "t": 45
+            }
+        },
+        {
+            "type": "item",
+            "id": "27837",
+            "obj": {
+                "i": 27837,
+                "n": "Coffee Beans",
+                "l": 415,
+                "c": 25919,
+                "t": 45
+            }
+        },
+        {
+            "type": "item",
+            "id": "27839",
+            "obj": {
+                "i": 27839,
+                "n": "Garden Beet Sugar",
+                "l": 395,
+                "c": 25108,
+                "t": 45
+            }
+        },
+        {
+            "type": "quest",
+            "id": "69266",
+            "obj": {
+                "i": 69266,
+                "n": "Commercially Flyable",
+                "g": 92,
+                "l": "Eulmore",
+                "s": 8002,
+                "f": 1
+            }
+        },
+        {
+            "type": "leve",
+            "id": "1477",
+            "obj": {
+                "i": 1477,
+                "n": "A Cookie for Your Troubles",
+                "l": 78,
+                "j": 16,
+                "p": 2951
+            }
+        },
+        {
+            "type": "npc",
+            "id": "1027848",
+            "obj": {
+                "i": 1027848,
+                "n": "Moyce",
+                "l": 2951
+            }
+        },
+        {
+            "type": "item",
+            "id": "27830",
+            "obj": {
+                "i": 27830,
+                "n": "Bomba Rice",
+                "l": 415,
+                "c": 25358,
+                "t": 45
+            }
+        },
+        {
+            "type": "item",
+            "id": "27878",
+            "obj": {
+                "i": 27878,
+                "n": "Coffee Biscuit",
+                "l": 418,
+                "c": 24007,
+                "t": 46,
+                "p": 3737
+            }
+        }
+    ]
+}
