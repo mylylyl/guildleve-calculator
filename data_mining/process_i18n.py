@@ -1,7 +1,12 @@
-import sys, csv, json, requests
+import sys
+import csv
+import json
+import requests
+
 
 def get_url(id):
     return "http://www.garlandtools.org/db/doc/item/en/3/%d.json" % id
+
 
 def get_item(id):
     resp = requests.get(get_url(id))
@@ -10,6 +15,7 @@ def get_item(id):
     else:
         print('[x] status code %d for %d' % (resp.status_code, i))
         return None
+
 
 j = {}
 l = {}
@@ -132,7 +138,7 @@ for lid in range(1600):
             t['amount'] = 1
         else:
             t['amount'] = entry['amount']
-        
+
         n['reward']['items'].append(t)
 
     # craft info
@@ -141,7 +147,7 @@ for lid in range(1600):
     ic = {}
     processed_ingredients = []
     stack = []
-    
+
     for recipe in n['craft']:
         for ingredient in recipe['ingredients']:
             if ingredient['id'] <= 19:
@@ -163,7 +169,7 @@ for lid in range(1600):
             # print('%d(%s) is not craftable' % (sid, i[str(sid)]['Name']))
             processed_ingredients.append(sid)
             continue
-        
+
         ic[str(sid)] = resp['item']['craft']
         processed_ingredients.append(sid)
 
@@ -185,7 +191,7 @@ for lid in range(1600):
                 ingredient['name'] = i[str(ingredient['id'])]['Name']
 
     n['ic'] = ic
-    
+
     # add leve to corresponding job json
     tl = {
         'id': lid,
@@ -194,9 +200,9 @@ for lid in range(1600):
 
     if str(n['leve']['jobCategory']) not in leves.keys():
         leves[str(n['leve']['jobCategory'])] = []
-    
+
     leves[str(n['leve']['jobCategory'])].append(tl)
-    
+
     try:
         with open('localized/%d.json' % lid, 'w', encoding='utf8') as file:
             json.dump(n, file, ensure_ascii=False)
@@ -211,6 +217,3 @@ for job in leves.keys():
             json.dump(leves[job], file, ensure_ascii=False)
     except:
         print('[x] failed to write job_%s.json: %s' % (job, sys.exc_info()[0]))
-
-
-
