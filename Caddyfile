@@ -1,0 +1,15 @@
+(cors) {
+  @{args.0} header Origin {args.0}
+  header @{args.0} Access-Control-Allow-Origin {args.0}
+}
+
+localhost:2020 {
+	root * src
+	file_server
+}
+
+localhost:2021 {
+	root * data_mining
+	file_server
+	import cors https://localhost:2020
+}
