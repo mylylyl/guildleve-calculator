@@ -195,7 +195,7 @@ for lid in range(1600):
     # add leve to corresponding job json
     tl = {
         'id': lid,
-        'text': '%s (需求物品: %s, 任务次数: %d)' % (n['leve']['name'], n['require']['name'], n['leve']['repeat'] + 1),
+        'text': '%s (需求物品: %s*%d, 任务次数: %d)' % (n['leve']['name'], n['require']['name'], n['require']['amount'], n['leve']['repeat'] + 1),
     }
 
     if str(n['leve']['jobCategory']) not in leves.keys():
@@ -212,8 +212,10 @@ for lid in range(1600):
     print('done %d' % lid)
 
 for job in leves.keys():
+    lj = leves[job]
+    lj.sort(key=lambda x: x['id'], reverse=True)
     try:
         with open('jobs/job_%s.json' % job, 'w', encoding='utf8') as file:
-            json.dump(leves[job], file, ensure_ascii=False)
+            json.dump(lj, file, ensure_ascii=False)
     except:
         print('[x] failed to write job_%s.json: %s' % (job, sys.exc_info()[0]))
