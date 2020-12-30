@@ -1,7 +1,7 @@
 let serverRegion = 'MaoXiaoPang';
 
-const COS_ENDPOINT = 'https://ff-1251188240.cos.accelerate.myqcloud.com/data_mining/leve';
-//const COS_ENDPOINT = 'https://localhost:2021';
+//const COS_ENDPOINT = 'https://ff-1251188240.cos.accelerate.myqcloud.com/data_mining/leve';
+const COS_ENDPOINT = 'https://localhost:2021';
 const PRICE_AMOUNT = 10;
 
 // utils
@@ -63,24 +63,7 @@ const fetchJobJson = function (job_id) {
 };
 
 // ui stuff
-const createItemElement = function (item_id, span_text, strong_text, offset) {
-  const span = document.createElement('span');
-  span.setAttribute('data-ck-item-id', item_id);
-  span.setAttribute('onclick', `open_url('https://universalis.app/market/${item_id}')`);
-  span.textContent = span_text;
-  const strong = document.createElement('strong');
-  strong.textContent = strong_text;
-
-  const li = document.createElement('li');
-  li.className = 'list-group-item d-flex justify-content-between';
-  if (offset) li.className += ' ms-3';
-  li.appendChild(span);
-  li.appendChild(strong);
-
-  return li;
-};
-
-const createRequirementHeaderElement = function (text) {
+const createRowHeader = function (text) {
   const strong = document.createElement('strong');
   strong.textContent = text;
 
@@ -91,7 +74,51 @@ const createRequirementHeaderElement = function (text) {
   return li;
 };
 
-const createRewardElement = function (reward_item, repeat, profit) {
+const createSingleRowItem = function (item_id, span_text, strong_text) {
+  const span = document.createElement('span');
+  span.setAttribute('data-ck-item-id', item_id);
+  span.setAttribute('onclick', `open_url('https://universalis.app/market/${item_id}')`);
+  span.textContent = span_text;
+
+  const strong = document.createElement('strong');
+  strong.textContent = strong_text;
+
+  const li = document.createElement('li');
+  li.className = 'list-group-item d-flex justify-content-between';
+  li.appendChild(span);
+  li.appendChild(strong);
+
+  return li;
+};
+
+const createDoubleRowItem = function (item_id, h6_text, small_text, strong_text, offset) {
+  const h6 = document.createElement('h6');
+  h6.setAttribute('data-ck-item-id', item_id);
+  h6.setAttribute('onclick', `open_url('https://universalis.app/market/${item_id}')`);
+  h6.className = 'my-0';
+  h6.textContent = h6_text;
+
+  const small = document.createElement('small');
+  small.setAttribute('class', 'text-muted');
+  small.textContent = small_text;
+
+  const div = document.createElement('div');
+  div.appendChild(h6);
+  div.appendChild(small);
+
+  const strong = document.createElement('strong');
+  strong.textContent = strong_text;
+
+  const li = document.createElement('li');
+  li.className = 'list-group-item d-flex justify-content-between';
+  if (offset) li.className += ` ms-${offset}`;
+  li.appendChild(div);
+  li.appendChild(strong);
+
+  return li;
+};
+
+const createDoubleRowItemX = function (reward_item, repeat, profit) {
   const span = document.createElement('h6');
   span.setAttribute('data-ck-item-id', reward_item.id);
   span.setAttribute('onclick', `open_url('https://universalis.app/market/${reward_item.id}')`);
@@ -116,173 +143,165 @@ const createRewardElement = function (reward_item, repeat, profit) {
 
 const clear_ui = function () {
   $('.progress-bar').width('0%')
-  $('#leve-repeat').text('');
-  $('#leve-level').text('');
-  $('#leve-patch').text('');
-  $('#leve-cost').text('');
-  $('#leve-exp').text('');
   $('#leve-require').empty();
   $('#requirements-purchasing-cost').empty();
-  $('#requirements-purchasing-cost').append(createRequirementHeaderElement('收购成本'));
+  $('#requirements-purchasing-cost').append(createRowHeader('收购成本'));
   $('#requirements-crafting-cost').empty();
-  $('#requirements-crafting-cost').append(createRequirementHeaderElement('制作成本'));
+  $('#requirements-crafting-cost').append(createRowHeader('制作成本'));
   $('#rewards').empty();
   $('#rewards-expectation').text('');
 };
 
-const calculate_purchase = async function (require) {
-  let price = await fetchItemPriceHQ(require);
-  console.log(`purchase price for ${require.name} is ${price}. need ${require.amount} per leve`);
-  return price * require.amount;
+/**
+ * 
+ * @param {*} item 
+ * add a `ppu` field to item with price per unit and return the total price
+ * @return ppu*amount
+ */
+const calculate_purchase = async function (item) {
+  item.ppu = await fetchItemPriceHQ(item);
+  console.log(`purchase price for ${item.name} is ${item.ppu}. need ${item.amount}`);
+  return item.ppu * item.amount;
 };
 
-const update_purchase = function (require, price, repeat, active) {
+const update_purchase = function (require, repeat, active) {
   const total_amount = require.amount * repeat;
-  const total_cost = price * repeat;
-  $('#requirements-purchasing-cost').append(createItemElement(require.id, `${require.name}*${total_amount}`, total_cost));
+  const total_cost = require.ppu * total_amount;
+  $('#requirements-purchasing-cost').append(createDoubleRowItem(require.id, `${require.name}*${total_amount}`, `单价 ${require.ppu}`, total_cost));
   $('#requirements-purchasing-cost > li:first-child').append(`<strong>${total_cost}</strong>`);
   if (active) $('#requirements-purchasing-cost > li:first-child').addClass('list-group-item-success');
 }
 
 /**
  * 
- * @param {*} ingredient 
- * @return price*amont
- */
-const calculate_ingredient = async function (ingredient) {
-  let price = await fetchItemPriceHQ(ingredient);
-  return price * ingredient.amount;
-};
-
-/**
- * 
- * @param {*} craft 
- * @param {*} ic 
+ * @param {*} craft craft recipe
+ * @param {array} ic array of ingredients craft recipes
  * @return craft ingredients and total cost
  */
 const calculate_craft = async function (craft, ic) {
   let calc = {
     ingredients: [],
-    cost: 0,
+    ppu: 0,
   };
 
   for (let ingredient of craft.ingredients) {
-    let cost = await calculate_ingredient(ingredient);
-    console.log(`ingredient ${ingredient.name}*${ingredient.amount} purchase price is ${cost}`);
-
-    // cost is total cost
-    ingredient.cost = cost;
+    const price = await calculate_purchase(ingredient);
 
     // craft it!
     if (('' + ingredient.id) in ic) {
       // note: this is craft calc for 1 peice
       let craft_calc = await calculate_crafts(ic['' + ingredient.id], ic);
-      craft_calc.ingredients = craft_calc.ingredients.map((x) => { x.amount *= ingredient.amount; x.cost *= ingredient.amount; return x; });
-      craft_calc.cost *= ingredient.amount;
-      console.log(`ingredient ${ingredient.name}*${ingredient.amount} craft price is ${craft_calc.cost}`);
+      console.log(`ingredient ${ingredient.name} craft price per unit is ${craft_calc.ppu}`);
 
-      if (craft_calc.cost < cost) {
+      if (craft_calc.ppu < ingredient.ppu) {
         console.log(`ingredient ${ingredient.name} is using craft`);
 
-        // update ingredient cost to craft cost
-        ingredient.cost = craft_calc.cost;
+        // add craft cost
+        ingredient.craft_ppu = craft_calc.ppu;
         // add craft
         ingredient.craft = craft_calc.ingredients;
+        // add to calc
+        calc.ingredients = [...calc.ingredients, ingredient];
+        calc.ppu += ingredient.craft_ppu * ingredient.amount;
+
+        continue;
       }
     }
 
     calc.ingredients = [...calc.ingredients, ingredient];
-    calc.cost += ingredient.cost;
+    calc.ppu += price;
   }
 
   return calc;
 };
 
+/**
+ * 
+ * @param {array} crafts array of craft recipes
+ * @param {array} ic array of ingredients craft recipes
+ * @return recipe with lowest cost of among all recipes
+ */
 const calculate_crafts = async function (crafts, ic) {
   let better = {
     ingredients: [],
-    cost: Number.MAX_VALUE,
+    ppu: Number.MAX_VALUE,
   }
 
-  for (let craft of crafts) {
-    let calc = await calculate_craft(craft, ic);
-    if (calc.cost < better.cost) better = calc;
+  for (const craft of crafts) {
+    const craft_calc = await calculate_craft(craft, ic);
+    if (craft_calc.ppu < better.ppu) better = craft_calc;
   }
 
   return better;
 }
 
-const update_craft = async function (craft_calc, repeat, active) {
-  for (let ingredient of craft_calc.ingredients) {
-    const total_amount = ingredient.amount * repeat;
-    const total_cost = ingredient.cost * repeat;
+const update_ingredients = function (ingredients, amount, repeat, level) {
+  for (const ingredient of ingredients) {
+    const total_amount = ingredient.amount * amount * repeat;
 
     if ('craft' in ingredient) {
-      $('#requirements-crafting-cost').append(createItemElement(ingredient.id, ingredient.name + '*' + total_amount, '制作'));
+      const total_craft_cost = ingredient.craft_ppu * total_amount;
 
-      for (let craft_ingredient of ingredient.craft) {
-        const craft_total_amount = craft_ingredient.amount * repeat;
-        const craft_total_cost = craft_ingredient.cost * repeat;
-        $('#requirements-crafting-cost').append(createItemElement(craft_ingredient.id, craft_ingredient.name + '*' + craft_total_amount, craft_total_cost, true));
-      }
+      $('#requirements-crafting-cost')
+        .append(createDoubleRowItem(ingredient.id, `${ingredient.name}*${total_amount}`,
+          `购买单价 ${ingredient.ppu}, 制作单价 ${ingredient.craft_ppu}`, `制作 ${total_craft_cost}`, level));
 
+      update_ingredients(ingredient.craft, amount * ingredient.amount, repeat, level + 1);
       continue;
     }
 
-    $('#requirements-crafting-cost').append(createItemElement(ingredient.id, ingredient.name + '*' + total_amount, total_cost));
+    const total_purchase_cost = ingredient.ppu * total_amount;
+    $('#requirements-crafting-cost').append(createDoubleRowItem(ingredient.id, `${ingredient.name}*${total_amount}`, `单价 ${ingredient.ppu}`, total_purchase_cost, level));
   }
+};
 
-  $('#requirements-crafting-cost > li:first-child').append('<strong>' + craft_calc.cost * repeat + '</strong>');
+/**
+ * 
+ * @param {*} craft_calc craft recipe
+ * @param {*} amount amount needed to craft
+ * @param {*} repeat 
+ * @param {*} active 
+ */
+const update_craft = function (craft_calc, amount, repeat, active) {
+  update_ingredients(craft_calc.ingredients, amount, repeat, 0);
+
+  $('#requirements-crafting-cost > li:first-child').append(`<strong>${craft_calc.ppu * amount * repeat}</strong>`);
   if (active) $('#requirements-crafting-cost > li:first-child').addClass('list-group-item-success');
 };
 
-const updateQuest = function (data, repeat, leve_cost) {
-  // update leve quest repeat counter
-  $('#leve-repeat').text(repeat);
-  // update leve details
-  $('#leve-level').text(data.leve.level);
-  $('#leve-patch').text(data.leve.patch);
-  $('#leve-cost').text(leve_cost);
-  $('#leve-exp').text(data.reward.exp);
-  // update leve quest requirements
-  // leve data without repeat
-  $('#leve-require').append(createItemElement(data.require.id, data.require.name, '*' + data.require.amount));
-};
-
 const updateCost = async function (data, repeat) {
-  // cost data with repeat
-  let purchase_cost = await calculate_purchase(data.require);
-  let craft_calc = await calculate_crafts(data.craft, data.ic);
+  const amount = data.require.amount;
 
-  if (purchase_cost > craft_calc.cost) {
-    update_purchase(data.require, purchase_cost, repeat, false);
-    update_craft(craft_calc, repeat, true);
-  } else {
-    update_purchase(data.require, purchase_cost, repeat, true);
-    update_craft(craft_calc, repeat, false);
-  }
+  const purchase_cost = await calculate_purchase(data.require);
+  // note craft cost is per item
+  const craft_calc = await calculate_crafts(data.craft, data.ic);
+
+  update_purchase(data.require, repeat, purchase_cost < craft_calc.ppu * amount);
+  update_craft(craft_calc, amount, repeat, purchase_cost > craft_calc.ppu * amount);
 
   return {
-    purchase: purchase_cost,
-    craft: craft_calc.cost,
+    purchase: purchase_cost * repeat,
+    craft: craft_calc.ppu * amount * repeat,
   }
 };
 
 const updateReward = async function (cost, reward, repeat, leve_cost) {
-  let better_cost = cost.purchase < cost.craft ? cost.purchase : cost.craft;
+  const better_cost = cost.purchase < cost.craft ? cost.purchase : cost.craft;
   // assuming HQ for now. HQ gets doubled gold reward
-  let gil = reward.gil * repeat * 2;
+  const gil = reward.gil * repeat * 2;
   // repeated net profit
-  let net = gil - better_cost;
+  const net = gil - better_cost;
+
+  console.log(`leve (x${repeat}) gil=${gil} cost=${better_cost} net=${net}`);
 
   // profit with math expectation
   let profit_exp = net / repeat;
 
   for (let item of reward.items) {
-    let price = await fetchItemPriceHQ(item);
-    let profit = (net + price * item.amount * repeat) / leve_cost;
-    $('#rewards').append(createRewardElement(item, repeat, profit));
-    profit_exp += price * item.amount * item.rate;
+    const price = await calculate_purchase(item);
+    const profit = (net + price * repeat) / leve_cost;
+    $('#rewards').append(createDoubleRowItem(item.id, `${item.name}*${item.amount*repeat}`, `单价 ${item.ppu}, 概率 ${item.rate * 100}%`, profit));
+    profit_exp += price * item.rate;
   }
 
   return profit_exp * repeat / leve_cost;
@@ -291,14 +310,12 @@ const updateReward = async function (cost, reward, repeat, leve_cost) {
 const processLeve = async function (data) {
   // empty all previous progress
   clear_ui();
+  $('.progress-bar').width('20%');
 
   // all rewards are calculated based on the repeated times
   const repeat = data.leve.repeat + 1;
   // and leve cost
   const leve_cost = data.leve.is_large ? 10 : 1;
-
-  updateQuest(data, repeat, leve_cost);
-  $('.progress-bar').width('20%');
 
   let cost = await updateCost(data, repeat);
   $('.progress-bar').width('60%')
