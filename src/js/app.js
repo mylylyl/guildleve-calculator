@@ -1,7 +1,7 @@
 let serverRegion = 'MaoXiaoPang';
 
-const COS_ENDPOINT = 'https://ff-1251188240.cos.accelerate.myqcloud.com/data_mining/leve/';
-//const COS_ENDPOINT = 'https://localhost:2021/';
+const COS_ENDPOINT = 'https://ff-1251188240.cos.accelerate.myqcloud.com/data_mining/leve';
+//const COS_ENDPOINT = 'https://localhost:2021';
 const PRICE_AMOUNT = 10;
 
 // utils
@@ -54,8 +54,12 @@ const fetchItemPriceHQ = async function (item) {
   return get_price(item, json.listings, PRICE_AMOUNT, true);
 }
 
-const fetchLeveJson = function (json_name) {
-  return fetch(COS_ENDPOINT + json_name + '.json').then((response) => response.json());
+const fetchLeveJson = function (leve_id) {
+  return fetch(`${COS_ENDPOINT}/localized/${leve_id}.json`).then((response) => response.json());
+};
+
+const fetchJobJson = function (job_id) {
+  return fetch(`${COS_ENDPOINT}/jobs/job_${job_id}.json`).then((response) => response.json());
 };
 
 // ui stuff
@@ -173,7 +177,7 @@ const calculate_craft = async function (craft, ic) {
     if (('' + ingredient.id) in ic) {
       // note: this is craft calc for 1 peice
       let craft_calc = await calculate_crafts(ic['' + ingredient.id], ic);
-      craft_calc.ingredients = craft_calc.ingredients.map((x) => {x.amount *= ingredient.amount; x.cost *= ingredient.amount; return x;});
+      craft_calc.ingredients = craft_calc.ingredients.map((x) => { x.amount *= ingredient.amount; x.cost *= ingredient.amount; return x; });
       craft_calc.cost *= ingredient.amount;
       console.log(`ingredient ${ingredient.name}*${ingredient.amount} craft price is ${craft_calc.cost}`);
 
@@ -311,9 +315,9 @@ const initSelect = async function (job_id) {
     $('.guildleve-select').off('select2:select');
     $('.guildleve-select').html('');
   }
-  const resp = await fetchLeveJson(job_id);
+  const resp = await fetchJobJson(job_id);
   const selectConfig = {
-    data: resp,
+    data: [{ id: 0, text: '选择一个委托' }, ...resp],
     width: 'style',
     theme: 'bootstrap4',
   };
@@ -321,14 +325,14 @@ const initSelect = async function (job_id) {
   $('#select-spinner').addClass('d-none');
   $('.guildleve-select').on('select2:select', function (e) {
     var data = e.params.data;
-    fetchLeveJson(data.id).then((resp) => processLeve(resp));
+    if (data.id !== 0) fetchLeveJson(data.id).then((resp) => processLeve(resp));
   });
 };
 
 const initListeners = function () {
   $('#job_select').on('click', '*', function () {
     clear_ui();
-    const job_id = $(this).attr('id');
+    const job_id = $(this).attr('data-job-id');
     initSelect(job_id);
     $('#job_select > a').removeClass('active');
     $(this).addClass('active');
