@@ -43,19 +43,19 @@
     }
 
     .ms-1 {
-      margin-left: 1rem!important;
+      margin-left: 1rem !important;
     }
 
     .ms-2 {
-      margin-left: 2rem!important;
+      margin-left: 2rem !important;
     }
 
     .ms-3 {
-      margin-left: 3rem!important;
+      margin-left: 3rem !important;
     }
 
     .ms-4 {
-      margin-left: 4rem!important;
+      margin-left: 4rem !important;
     }
   </style>
 </head>
@@ -82,6 +82,10 @@
 
       <div class="py-3 text-center">
         <div class="spinner-border d-none" role="status" id="select-spinner"></div>
+        <div class="pb-3">
+          <input type="checkbox" class="btn-check" id="btn-manual" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btn-manual">手动模式</label>
+        </div>
         <select class="guildleve-select d-none"></select>
       </div>
 
@@ -90,24 +94,19 @@
       </div>
 
       <div class="pt-5 row g-3">
-        <div class="col order-md-first">
+        <div class="col order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">总成本</span>
             <span class="badge bg-secondary rounded-pill" id="require-quality">HQ</span>
           </h4>
-
           <ul class="list-group mb-3" id="requirements-purchasing-cost"></ul>
           <ul class="list-group mb-3" id="requirements-crafting-cost"></ul>
         </div>
-
         <div class="col order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">净利润</span>
           </h4>
-          <ul class="list-group mb-3" id="rewards">
-
-          </ul>
-
+          <ul class="list-group mb-3" id="rewards"></ul>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-sm">
               <div>
