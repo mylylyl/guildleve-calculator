@@ -1,4 +1,5 @@
-let serverRegion = 'MaoXiaoPang';
+let ServerRegion = 'MaoXiaoPang';
+let ManualMode = false;
 
 //const COS_ENDPOINT = 'https://ff-1251188240.cos.accelerate.myqcloud.com/data_mining/leve';
 const COS_ENDPOINT = 'https://localhost:2021';
@@ -42,7 +43,7 @@ const get_price = function (item, listings, amount, hq) {
 }
 
 const fetchItemPriceHQ = async function (item) {
-  let json = await fetchUniversalis(serverRegion, item.id);
+  let json = await fetchUniversalis(ServerRegion, item.id);
   // stones are only NQ
   if (item.id <= 19) return get_price(item, json.listings, PRICE_AMOUNT, false);
   const hq_listings = get_listings(json.listings, true);
@@ -52,6 +53,19 @@ const fetchItemPriceHQ = async function (item) {
     return get_price(item, json.listings, PRICE_AMOUNT, false);
   }
   return get_price(item, json.listings, PRICE_AMOUNT, true);
+}
+
+const fetchItemPriceNQ = async function (item) {
+  let json = await fetchUniversalis(ServerRegion, item.id);
+  // stones are only NQ
+  if (item.id <= 19) return get_price(item, json.listings, PRICE_AMOUNT, false);
+  const nq_listings = get_listings(json.listings, false);
+  // no hq
+  if (nq_listings.length === 0) {
+    console.log(`item ${item.name} doesn't have enough NQ listings`);
+    return json.averagePriceNQ;
+  }
+  return get_price(item, json.listings, PRICE_AMOUNT, false);
 }
 
 const fetchLeveJson = function (leve_id) {
@@ -143,6 +157,8 @@ const createDoubleRowItemX = function (reward_item, repeat, profit) {
 
 const clear_ui = function () {
   $('.progress-bar').width('0%')
+  $('.progress-bar').addClass('progress-bar-striped');
+  $('.progress-bar').addClass('progress-bar-animated');
   $('#leve-require').empty();
   $('#requirements-purchasing-cost').empty();
   $('#requirements-purchasing-cost').append(createRowHeader('收购成本'));
@@ -158,9 +174,9 @@ const clear_ui = function () {
  * add a `ppu` field to item with price per unit and return the total price
  * @return ppu*amount
  */
-const calculate_purchase = async function (item) {
-  item.ppu = await fetchItemPriceHQ(item);
-  console.log(`purchase price for ${item.name} is ${item.ppu}. need ${item.amount}`);
+const calculate_purchase = async function (item, hq) {
+  item.ppu = hq ? await fetchItemPriceHQ(item) : await fetchItemPriceNQ(item);
+  console.log(`purchase price for ${item.name}(${hq ? 'hq' : 'nq'}) is ${item.ppu}. need ${item.amount}`);
   return item.ppu * item.amount;
 };
 
@@ -173,31 +189,32 @@ const update_purchase = function (require, repeat, active) {
 }
 
 /**
- * 
+ * Note: we always craft with nq, which is not accurate in some scenario
  * @param {*} craft craft recipe
  * @param {array} ic array of ingredients craft recipes
  * @return craft ingredients and total cost
  */
-const calculate_craft = async function (craft, ic) {
+const calculate_craft = async function (craft, ic, hq) {
   let calc = {
     ingredients: [],
     ppu: 0,
   };
 
   for (let ingredient of craft.ingredients) {
-    const price = await calculate_purchase(ingredient);
+    ingredient.amount /= craft.yield;
+    const price = await calculate_purchase(ingredient, hq);
 
     // craft it!
     if (('' + ingredient.id) in ic) {
       // note: this is craft calc for 1 peice
-      let craft_calc = await calculate_crafts(ic['' + ingredient.id], ic);
+      let craft_calc = await calculate_crafts(ic['' + ingredient.id], ic, false);
       console.log(`ingredient ${ingredient.name} craft price per unit is ${craft_calc.ppu}`);
 
       if (craft_calc.ppu < ingredient.ppu) {
         console.log(`ingredient ${ingredient.name} is using craft`);
 
         // add craft cost
-        ingredient.craft_ppu = craft_calc.ppu;
+        ingredient.craft_ppu = Math.round(craft_calc.ppu);
         // add craft
         ingredient.craft = craft_calc.ingredients;
         // add to calc
@@ -219,16 +236,16 @@ const calculate_craft = async function (craft, ic) {
  * 
  * @param {array} crafts array of craft recipes
  * @param {array} ic array of ingredients craft recipes
- * @return recipe with lowest cost of among all recipes
+ * @return recipe with lowest cost of among all recipes for each
  */
-const calculate_crafts = async function (crafts, ic) {
+const calculate_crafts = async function (crafts, ic, hq) {
   let better = {
     ingredients: [],
     ppu: Number.MAX_VALUE,
   }
 
   for (const craft of crafts) {
-    const craft_calc = await calculate_craft(craft, ic);
+    const craft_calc = await calculate_craft(craft, ic, hq);
     if (craft_calc.ppu < better.ppu) better = craft_calc;
   }
 
@@ -265,16 +282,16 @@ const update_ingredients = function (ingredients, amount, repeat, level) {
 const update_craft = function (craft_calc, amount, repeat, active) {
   update_ingredients(craft_calc.ingredients, amount, repeat, 0);
 
-  $('#requirements-crafting-cost > li:first-child').append(`<strong>${craft_calc.ppu * amount * repeat}</strong>`);
+  $('#requirements-crafting-cost > li:first-child').append(`<strong>${Math.round(craft_calc.ppu * amount * repeat)}</strong>`);
   if (active) $('#requirements-crafting-cost > li:first-child').addClass('list-group-item-success');
 };
 
-const updateCost = async function (data, repeat) {
+const updateCost = async function (data, repeat, hq) {
   const amount = data.require.amount;
 
-  const purchase_cost = await calculate_purchase(data.require);
+  const purchase_cost = await calculate_purchase(data.require, true);
   // note craft cost is per item
-  const craft_calc = await calculate_crafts(data.craft, data.ic);
+  const craft_calc = await calculate_crafts(data.craft, data.ic, hq);
 
   update_purchase(data.require, repeat, purchase_cost < craft_calc.ppu * amount);
   update_craft(craft_calc, amount, repeat, purchase_cost > craft_calc.ppu * amount);
@@ -282,6 +299,16 @@ const updateCost = async function (data, repeat) {
   return {
     purchase: purchase_cost * repeat,
     craft: craft_calc.ppu * amount * repeat,
+  }
+};
+
+/**
+ * build
+ */
+const updateCostManual = function () {
+  return {
+    purchase: 0,
+    craft: 0,
   }
 };
 
@@ -300,7 +327,7 @@ const updateReward = async function (cost, reward, repeat, leve_cost) {
   for (let item of reward.items) {
     const price = await calculate_purchase(item);
     const profit = (net + price * repeat) / leve_cost;
-    $('#rewards').append(createDoubleRowItem(item.id, `${item.name}*${item.amount*repeat}`, `单价 ${item.ppu}, 概率 ${item.rate * 100}%`, profit));
+    $('#rewards').append(createDoubleRowItem(item.id, `${item.name}*${item.amount * repeat}`, `单价 ${item.ppu}, 概率 ${item.rate * 100}%`, profit));
     profit_exp += price * item.rate;
   }
 
@@ -317,12 +344,24 @@ const processLeve = async function (data) {
   // and leve cost
   const leve_cost = data.leve.is_large ? 10 : 1;
 
-  let cost = await updateCost(data, repeat);
-  $('.progress-bar').width('60%')
+  let cost = {
+    purchase: 0,
+    craft: 0,
+  };
+
+  if (ManualMode) {
+
+  } else {
+    cost = await updateCost(data, repeat);
+    $('.progress-bar').width('60%')
+  }
 
   let profit_exp = await updateReward(cost, data.reward, repeat, leve_cost);
-  $('.progress-bar').width('100%')
   $('#rewards-expectation').text(Math.round(profit_exp));
+
+  $('.progress-bar').width('100%')
+  $('.progress-bar').removeClass('progress-bar-striped');
+  $('.progress-bar').removeClass('progress-bar-animated');
 };
 
 const initSelect = async function (job_id) {
@@ -356,8 +395,12 @@ const initListeners = function () {
   });
   $('#server-region').on('change', function (data) {
     const val = data.currentTarget.selectedOptions[0].value;
-    serverRegion = val;
-    console.log(`change server region to ${val}`);
+    ServerRegion = val;
+    console.log(`change server region to ${ServerRegion}`);
+  });
+  $('#btn-manual').on('change', function () {
+    ManualMode = this.checked;
+    console.log(`change manual mode to ${ManualMode}`);
   });
 };
 
